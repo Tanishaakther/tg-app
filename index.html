@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earn USDT $</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0d1321;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+}
+.container { width: 350px; }
+
+
+/* Top Card */
+.top-card {
+  background: #1b263b;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+
+#user-name {
+    font-weight: bold;
+    font-size: 22px;
+}
+.balance {
+  color: gold;
+  font-size: 30px;
+  font-weight: bold;
+}
+#earned-points {
+font-size:40px;
+}
+.small {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* Cards */
+.card {
+  background: #1b263b;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.progress {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#00ff88 0%, #333 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.progress .inner-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #1b263b;
+  position: absolute;
+}
+#ads-progress { position: relative; font-weight: bold; }
+
+
+
+    .history-section {
+      display: none;
+      background: #1b263b;
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+
+    .withdraw-section select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    table {
+      width: 100%;
+      color: #fff;
+      font-size: 12px;
+    }
+    
+/* Withdraw Section */ 
+.withdraw-section {  
+margin-top: 15px;   
+display: none;   
+padding: 20px;   
+background: linear-gradient(to right, #373b44, #4286f4);   
+border-radius: 12px;   
+box-shadow: 0 4px 15px rgba(0,0,0,0.5);   
+text-align: center; 
+} 
+.withdraw-section h3 {   
+color:#fff;   
+margin-bottom:12px;   
+font-weight:bold;   
+text-align:center;   
+letter-spacing:1px;   
+text-shadow:0 0 5px rgba(0,255,234,0.7); 
+} 
+.withdraw-section .form-group {   
+margin-bottom: 12px;   
+width: 100%; 
+}
+.withdraw-section input, 
+.withdraw-section select {   
+width: 100%;   
+padding: 12px;   
+border-radius: 6px;   
+border: none;   
+background-color: #f0f0f0;   
+color: #333;   
+font-weight: bold;   
+font-size: 15px;   
+box-sizing: border-box; 
+} 
+.withdraw-section input:focus, 
+.withdraw-section select:focus {   
+border: 2px solid #00e676;   
+outline: none; } 
+.withdraw-section .phone-input {  
+ position: relative; 
+} 
+.withdraw-section .phone-input .country-code {   
+position: absolute;   
+left: 12px;   
+top: 50%;   
+transform: translateY(-50%);   
+font-weight: bold;   
+color: #333; 
+} 
+.withdraw-section .phone-input input {   
+padding-left: 55px; 
+}
+.withdraw-section button {   
+background: linear-gradient(159deg, rgba(1,50,32,1)0%, rgba(17,170,136,1)100%);   
+color: white;   
+width: 100%;   
+padding: 12px;   
+font-size: 15px;   
+margin-top: 10px;   
+border: none;   
+border-radius: 6px;   
+font-weight: bold;   
+box-shadow: 0 4px 0 #4e8c21;   
+cursor: pointer;   
+transition: all 0.2s ease; 
+} 
+.withdraw-section button:hover {   
+background: rgb(1,50,32); 
+} 
+#withdraw-status {   
+font-size: 14px;   
+margin-top: 8px;   
+text-align: center; 
+}  
+
+/* History Section */ 
+.history-section {   
+margin-top:20px;   
+background:linear-gradient(to right,#373b44,#4286f4);   
+padding:15px;   
+border-radius:15px;   
+max-height:280px;   
+overflow:hidden;   
+box-shadow:0 8px 25px rgba(0,0,0,0.7);   
+display:none; 
+} 
+.history-section h3 {   
+color:#fff;   
+margin-bottom:12px;   
+font-weight:bold;   
+text-align:center;   
+letter-spacing:1px;   
+text-shadow:0 0 5px rgba(0,255,234,0.7); 
+}
+.history-table-wrapper {   
+max-height:280px;   
+overflow-y:auto; 
+} 
+.history-section table {   
+width:100%;   
+border-collapse:separate;   
+border-spacing:0;   
+font-family:'Segoe UI', sans-serif;   
+font-size:12px;   
+text-align:center;   
+color:#fff; 
+} 
+.history-section thead th {   
+background: #000;   
+color:gold;   
+font-weight:bold;   
+padding:5px;   
+position: sticky;   
+top:0;   
+z-index:10;   
+border-top-left-radius:4px;   
+border-top-right-radius:4px; 
+} 
+.history-section tbody td {   
+padding:10px 8px;   
+border-right:1px solid rgba(255,255,255,0.2);
+} 
+.history-section tbody tr:nth-child(even) {   
+background:rgba(0,198,255,0.05); 
+} 
+.history-section tbody tr:nth-child(odd) {   
+background:rgba(0,0,0,0.2); 
+} 
+.history-section tbody tr:hover {   
+background:rgba(0,255,234,0.2);   
+transform:scale(1.02);   
+transition:0.2s;   
+cursor:pointer; 
+}  
+#auto-ad-btn, #stop-auto-btn {     
+display: none; 
+}  
+
+
+
+
+  button {     
+ width:100%;     
+ margin:8px 0;     
+ padding:12px;     
+ font-size:15px;    
+ border:none;     
+ border-radius:8px;    
+ font-weight:bold;     
+ background: linear-gradient(to bottom,#43cea2,#185a9d);     
+ color:white;     
+ box-shadow:0 5px 0 #0e4c7d;     
+ transition:all 0.2s ease;     
+ cursor:pointer; 
+ } 
+ button:hover {     
+ transform:translateY(-2px);     
+ background:rgb(1,50,32);     
+ box-shadow:0 7px 0 green; 
+ } 
+  button:disabled {     
+ opacity:0.5;     
+ cursor:not-allowed; 
+ }  
+ 
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- TOP CARD -->
+<div class="top-card">
+	<div class="left">
+		<p>Welcome, <span id="user-name">Guest</span></p>
+    	<div class="balance"><span id="earned-points">0.00</span>$</div>
+    	<div class="small">Earn by watching ads</div>
+		<br>
+		<div class="small">Watch ad: <span id="watched-ads">0</span></div>
+		<div class="small">Today Left: <span id="ads-left">0</span></div>
+    </div>
+<div class="progress" id="progress-circle">
+	<div class="inner-circle"></div>
+	<span id="ads-progress">0%</span>
+</div>
+</div>
+
+<!-- Earn -->
+<div class="card">
+	<h3>🎬 Earn</h3>
+		<button onclick="watchAd()">WATCH AD </button>
+		<button  id="direct-ad-btn" onclick="showDirectAd()" disabled>REWARD AD </button>
+</div>
+
+<!-- Options -->
+<div class="card">
+	<h3>⚡ Options</h3>
+		<button onclick="toggleWithdrawForm()">WITHDRAW</button>
+		<button onclick="toggleHistory()">HISTORY</button>
+</div>
+
+<!-- Withdraw Section -->   
+<div class="withdraw-section" id="withdraw-section">     
+	<h3>WITHDRAWAL REQUEST</h3>     
+<div class="form-group">       
+	<input type="number" id="withdraw-amount" placeholder="Minimum Withdraw 5$ Dollar" />     
+</div>     
+<div class="form-group">       
+	<select id="payment-method">
+		<option value="" selected disabled>Select Method</option>         
+		<option value="Bkash">Bkash</option>         
+		<option value="Nagad">Nagad</option>         
+		<option value="Rocket">Rocket</option>           
+		<option value="Upay">Upay</option>       
+	</select>     
+</div>     
+<div class="form-group phone-input">       
+	<span class="country-code">+880</span>       
+	<input type="number" id="withdraw-phone" placeholder="Enter phone number" maxlength="10" oninput="validatePhoneNumber()"/>            
+</div>     
+<button onclick="withdrawPoints()">WITHDRAW</button>     
+	<p id="withdraw-status"></p>   
+</div>    
+
+<!-- History Section -->   
+<div class="history-section" id="history-section">     
+	<h3>Your History</h3>     
+<div class="history-table-wrapper">       
+	<table>         
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Type</th>
+				<th>Amount ($)</th>
+				<th>Method</th>           
+			</tr>         
+		</thead>         
+	<tbody id="history-body">          
+			<tr>
+				<td colspan="5">No history yet</td>
+			</tr>         
+	</tbody>       
+	</table>     
+</div>   
+</div> 
+</div>
+
+<!-- ORIGINAL SCRIPT (UNCHANGED) -->
+<script src='https://libtl.com/sdk.js' data-zone='9793967' data-sdk='show_9793967'></script>
+
+
+
+  <script> 
+  const MIN_WITHDRAW_POINTS = 5, 
+  MAX_ADS_PER_DAY = 20; 
+  const ADMIN_USER_ID = 5167295551, 
+  BOT_TOKEN = "7442193537:AAEja8qSHom2YR_xvCtPH8sF2sCOINX5uy0";  
+  
+  // Lifetime totals 
+  let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0; 
+  let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0;  
+  
+  // Daily tracking (resets every day) 
+  const today = new Date().toLocaleDateString(); 
+  let todayKey = `dailyAds-${today}`; 
+  let dailyWatchedAds = parseInt(localStorage.getItem(todayKey)) || 0;  
+  
+  // History 
+  let historyKey = "adHistory"; 
+  let adHistory = JSON.parse(localStorage.getItem(historyKey)) || [];  
+  let autoAdInterval;  
+    
+    let directAdUnlocked = false;
+let directAdTimer;
+  
+  // DOM Init 
+  document.getElementById('watched-ads').textContent = watchedAdsCount; 
+  document.getElementById('earned-points').textContent = earnedPoints.toFixed(2); 
+  updateProgressCircle(); renderHistory(); checkDailyLimit();  
+  
+  // ================== Telegram User Init ================== 
+  let profileName="Guest", 
+  userName="Not set", 
+  userId="*****", 
+  isTelegramUser=false; 
+  function initTelegramUser(){     
+  if(window.Telegram && window.Telegram.WebApp){         
+  const tg=window.Telegram.WebApp; tg.ready();         
+  if(tg.initDataUnsafe && tg.initDataUnsafe.user){             
+  const u=tg.initDataUnsafe.user;             
+  profileName = u.first_name + (u.last_name ? " "+u.last_name : "");             
+  userName = u.username ? "@"+u.username : "Not set";             
+  userId = u.id; isTelegramUser=true;         
+  }     
+  }     
+  if(!isTelegramUser){         
+  const savedName=localStorage.getItem("customProfileName");         
+  if(savedName) profileName=savedName;         
+  else { 
+  profileName=prompt("Enter your name:")||"Guest"; 
+  localStorage.setItem("customProfileName",profileName);}     
+  }     
+  document.getElementById("user-name").textContent=profileName; 
+  } 
+  initTelegramUser();  
+  
+  // ================== Progress Ring ================== 
+  function updateProgressCircle() {     
+  const percent = Math.min((dailyWatchedAds / MAX_ADS_PER_DAY) * 100, 100);     
+  const r = Math.round(255 + (17 - 255) * (percent / 100));     
+  const g = Math.round(0 + (170 - 0) * (percent / 100));     
+  const b = Math.round(0 + (136 - 0) * (percent / 100));     
+  const color = `rgb(${r},${g},${b})`;     
+  const circle = document.getElementById('progress-circle');     
+  circle.style.background = `conic-gradient(${color} 0% ${percent}%, #2a2a2a ${percent}% 100%)`;     
+  document.getElementById('ads-progress').textContent = `${Math.floor(percent)}%`; 
+  }  
+  
+  // ================== Watch Ads ================== 
+   
+    
+   
+    // ================== নতুন watchAd() ফাংশন ==================
+  let isWatchingAd = false; // নতুন flag
+
+  function watchAd() {
+      if (isWatchingAd) return; // যদি আগে থেকেই চলছে, নতুন click ignore
+      if(dailyWatchedAds >= MAX_ADS_PER_DAY) {
+          alert("⚠ Today's ad limit has expired.");
+          checkDailyLimit();
+          return;
+      }
+
+      if(typeof show_9793967 === 'function'){
+          isWatchingAd = true; // watch শুরু
+          show_9793967().then(() => {
+              watchedAdsCount++;
+              earnedPoints += 0.03;
+              dailyWatchedAds++;
+
+              localStorage.setItem('watchedAdsCount', watchedAdsCount);
+              localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+              localStorage.setItem(todayKey, dailyWatchedAds);
+
+              const now = new Date();
+              adHistory.unshift({
+                  date: now.toLocaleDateString(),
+                  time: now.toLocaleTimeString(),
+                  type: "Earned",
+                  amount: 0.03,
+                  method: "-"
+              });
+              localStorage.setItem(historyKey, JSON.stringify(adHistory));
+
+              document.getElementById('watched-ads').textContent = watchedAdsCount;
+              document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+              updateProgressCircle();
+              renderHistory();
+              checkDailyLimit();
+
+              if (dailyWatchedAds % 5 === 0) {
+                  directAdUnlocked = true;
+                  document.getElementById('direct-ad-btn').disabled = false;
+              }
+
+              isWatchingAd = false; // watch শেষ
+          }).catch(() => {
+              isWatchingAd = false; // error হলে reset
+          });
+      }
+  }
+  
+  // ================== Daily Reset ================== 
+  function resetDailyProgress(){     
+  const currentDate = new Date().toLocaleDateString();     
+  if(localStorage.getItem('lastResetDate')!==currentDate){         
+  dailyWatchedAds=0; todayKey=`dailyAds-${currentDate}`;         
+  localStorage.setItem(todayKey,dailyWatchedAds);         
+  localStorage.setItem('lastResetDate',currentDate);         
+  updateProgressCircle(); 
+  checkDailyLimit();     
+  } 
+  } 
+  resetDailyProgress();  
+  
+  // ================== Withdraw ================== 
+  function prependCountryCode(){     
+  const phoneInput=document.getElementById('withdraw-phone');     
+  if(phoneInput.value.startsWith('+880')) return;     
+  phoneInput.value = phoneInput.value.replace(/^0+/,''); 
+  }       
+  function validatePhoneNumber() {     
+  const phoneInput = document.getElementById('withdraw-phone');     
+  let phone = phoneInput.value;      
+  
+  // Check if the first digit is 0, and remove it if present     
+  if (phone.startsWith('0')) {         
+  phone = phone.substring(1);     
+  }      
+  
+  // Remove any non-digit characters     
+  phone = phone.replace(/[^0-9]/g, '');     
+   
+  // Set the updated value back to the input field     
+  phoneInput.value = phone;      
+  
+  // Limit to 10 digits     
+  if (phone.length > 10) {         
+  phoneInput.value = phone.substring(0, 10);     
+  } 
+  }               
+  function validateWithdrawForm() {     
+  const status = document.getElementById('withdraw-status');         
+  const amount = parseFloat(document.getElementById('withdraw-amount').value);       
+  const method = document.getElementById('payment-method').value;     
+  const phone = document.getElementById('withdraw-phone').value.trim();          
+   
+  // Amount check     
+  if (isNaN(amount) || amount <= 0) {         
+  status.textContent = '⚠ Please enter valid amount';         
+  status.style.color = 'orange';         
+  return false;     
+  }      
+  if (amount < MIN_WITHDRAW_POINTS) {         
+  status.textContent = `⚠ Minimum withdrawal is ${MIN_WITHDRAW_POINTS}$`;         
+  status.style.color = 'orange';        
+  return false;     
+  }      
+  if (amount > earnedPoints) {         
+  status.textContent = '⚠ Insufficient balance';         
+  status.style.color = 'red';         
+  return false;    
+  }  
+  
+  // Payment method check     
+  if (!method) {         
+  status.textContent = '⚠ Please select payment method';         
+  status.style.color = 'orange';         
+  return false;     
+  }                   
+  
+  // Phone check - 10 digits validation     
+  if (!phone || phone.length !== 10) {         
+  status.textContent = '⚠ Please enter a valid 10-digit phone number';        
+  status.style.color = 'orange';         
+  return false;     
+  }      
+  status.textContent = '✔ Ready to withdraw';     
+  status.style.color = 'lightgreen';    
+  return true; }                             
+  function withdrawPoints(){    
+  prependCountryCode(); 
+  if(!validateWithdrawForm()) return;     
+  const amount=parseFloat(document.getElementById('withdraw-amount').value);     
+  const method=document.getElementById('payment-method').value;     
+  const phone=document.getElementById('withdraw-phone').value.trim();     
+  earnedPoints-=amount; document.getElementById('earned-points').textContent=earnedPoints.toFixed(2);     
+  localStorage.setItem('earnedPoints',earnedPoints.toFixed(2));     
+  const now=new Date();     
+  adHistory.unshift({date:now.toLocaleDateString(),time:now.toLocaleTimeString(),type:"Withdraw",amount:amount,method:method});     
+  localStorage.setItem(historyKey,JSON.stringify(adHistory));     
+  renderHistory();     
+  const msg=`💵 Withdraw Request 💵  \n👤 Name: ${profileName} \n🔗 Username: ${userName} \n🆔 ID: ${userId} \n💰 Amount: ${amount}$ \n🏧 Method: ${method} \n📞 Phone: +880${phone}`;     
+  sendWithdrawRequestToAdmin(msg);     
+  document.getElementById('withdraw-status').textContent='✔ Withdrawal request sent!';     
+  document.getElementById('withdraw-status').style.color='lightgreen';     
+  document.getElementById('withdraw-amount').value=''; 
+  document.getElementById('withdraw-phone').value=''; } 
+  document.getElementById('withdraw-amount').addEventListener('input',validateWithdrawForm); 
+  document.getElementById('withdraw-phone').addEventListener('input',validateWithdrawForm);  
+  
+  // ================== History ================== 
+  function renderHistory(){     
+  const tbody=document.getElementById('history-body'); 
+  tbody.innerHTML='';     
+  if(adHistory.length===0){ 
+  tbody.innerHTML='<tr><td colspan="5">⚠ No history yet</td></tr>'; return; }     
+  adHistory.forEach(item=>{         
+  tbody.innerHTML+=`<tr>             
+  <td>${item.date||''}</td>             
+  <td>${item.time||''}</td>             
+  <td>${item.type||''}</td>             
+  <td>${item.amount!=null?item.amount:''}</td>             
+  <td>${item.method||'-'}</td>         
+  </tr>`;     
+  }); 
+  }  
+  
+
+  // ================== UI Toggles ==================          
+  document.querySelector("button[onclick='toggleWithdrawForm()']").addEventListener('click', ()=>{     
+  const el=document.getElementById('withdraw-section');     
+  el.style.display = (el.style.display==='none' || el.style.display==='') ? 'block' : 'none'; });  
+  document.querySelector("button[onclick='toggleHistory()']").addEventListener('click', ()=>{     
+  const el=document.getElementById('history-section');     
+  el.style.display = (el.style.display==='none' || el.style.display==='') ? 'block' : 'none'; });   
+  
+  // ================== Daily Limit Check ================== 
+  function checkDailyLimit(){     
+  const watchBtn=document.querySelector("button[onclick='watchAd()']");     
+
+  if(dailyWatchedAds>=MAX_ADS_PER_DAY){ watchBtn.disabled=true; }     
+  else{ watchBtn.disabled=false; }     
+  document.getElementById("ads-left").textContent=MAX_ADS_PER_DAY-dailyWatchedAds; }  
+  
+   // ================== Direct Ad as new tab ==================
+function showDirectAd() {
+    if(!directAdUnlocked){
+        alert("⚠ Watch 5 ads first!");
+        return;
+    }
+
+    // লিঙ্ক নতুন ট্যাবে খোলা
+    window.open("https://omg10.com/4/10864029", "_blank");
+
+    // reward points
+    earnedPoints += 0.10;
+    localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+    document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+
+    // history update
+    const now = new Date();
+    adHistory.unshift({
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString(),
+        type: "Reward",
+        amount: 0.10,
+        method: "-"
+    });
+    localStorage.setItem(historyKey, JSON.stringify(adHistory));
+    renderHistory();
+
+    // reset direct ad unlock
+    directAdUnlocked = false;
+    document.getElementById('direct-ad-btn').disabled = true;
+}
+  
+  // ================== Telegram Message Function ================== 
+  
+  function sendWithdrawRequestToAdmin(message){     
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${encodeURIComponent(message)}`); } 
+    
+  </script> 
+</body>
+</html>
