@@ -460,7 +460,7 @@ let directAdTimer;
               renderHistory();
               checkDailyLimit();
 
-              if (dailyWatchedAds % 5 === 0) {
+              if (dailyWatchedAds % 2 === 0) {
                   directAdUnlocked = true;
                   document.getElementById('direct-ad-btn').disabled = false;
               }
