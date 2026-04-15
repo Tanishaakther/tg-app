@@ -353,8 +353,8 @@ display: none;
 
 
   <script> 
-  const MIN_WITHDRAW_POINTS = 5, 
-  MAX_ADS_PER_DAY = 20; 
+  const MIN_WITHDRAW_POINTS = 20, 
+  MAX_ADS_PER_DAY = 50; 
   const ADMIN_USER_ID = 5167295551, 
   BOT_TOKEN = "7442193537:AAEja8qSHom2YR_xvCtPH8sF2sCOINX5uy0";  
   
@@ -437,7 +437,7 @@ let directAdTimer;
           isWatchingAd = true; // watch শুরু
           show_9793967().then(() => {
               watchedAdsCount++;
-              earnedPoints += 0.03;
+              earnedPoints += 0.02;
               dailyWatchedAds++;
 
               localStorage.setItem('watchedAdsCount', watchedAdsCount);
@@ -449,7 +449,7 @@ let directAdTimer;
                   date: now.toLocaleDateString(),
                   time: now.toLocaleTimeString(),
                   type: "Earned",
-                  amount: 0.03,
+                  amount: 0.02,
                   method: "-"
               });
               localStorage.setItem(historyKey, JSON.stringify(adHistory));
@@ -608,7 +608,7 @@ let directAdTimer;
    // ================== Direct Ad as new tab ==================
 function showDirectAd() {
     if(!directAdUnlocked){
-        alert("⚠ Watch 5 ads first!");
+        alert("⚠ Watch 2 ads first!");
         return;
     }
 
@@ -616,7 +616,7 @@ function showDirectAd() {
     window.open("https://omg10.com/4/10864029", "_blank");
 
     // reward points
-    earnedPoints += 0.10;
+    earnedPoints += 0.04;
     localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
     document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
 
@@ -626,7 +626,7 @@ function showDirectAd() {
         date: now.toLocaleDateString(),
         time: now.toLocaleTimeString(),
         type: "Reward",
-        amount: 0.10,
+        amount: 0.04,
         method: "-"
     });
     localStorage.setItem(historyKey, JSON.stringify(adHistory));
