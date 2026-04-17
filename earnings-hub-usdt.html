@@ -691,25 +691,33 @@ if (watchAdCounter >= freq) {
         <p>Please wait...</p>
     `);
 
-    setTimeout(async () => {
-        closePopup();
 
-        try {
-            const db = firebase.database();
+            setTimeout(async () => {
+    closePopup();
 
-            await db.ref(`users/${tgUser.id}/balance`)
-                .set(firebase.database.ServerValue.increment(reward));
+    try {
+        const db = firebase.database();
 
-            tg.showAlert(`🎉 Reward Ad Completed +${reward} TK`);
-            tg.HapticFeedback.notificationOccurred('success');
+        await db.ref(`users/${tgUser.id}/balance`)
+            .set(firebase.database.ServerValue.increment(reward));
 
-            renderUI();
+        await db.ref(`users/${tgUser.id}/totalEarned`)
+            .set(firebase.database.ServerValue.increment(reward));
 
-        } catch (e) {
-            tg.showAlert("Reward failed");
-        }
+        // local state update
+        userState.balance += reward;
+        userState.totalEarned += reward;
 
-    }, 15000);
+        tg.showAlert(`🎉 Reward Ad Completed +${reward} TK`);
+        tg.HapticFeedback.notificationOccurred('success');
+
+        renderUI();
+
+    } catch (e) {
+        tg.showAlert("Reward failed");
+    }
+
+}, 15000);
 }
     });
     </script>
