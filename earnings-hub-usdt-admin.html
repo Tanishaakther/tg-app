@@ -69,7 +69,8 @@
         .dynamic-item-list { list-style: none; padding-left: 0; }
         .dynamic-item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--light); }
         .withdraw-method-group { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-
+    .withdraw-method-group  input{ width: 50%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        .btn-danger { width:50%; padding: 8px 12px; border: none; border-radius: 5px; color: #fff; cursor: pointer; margin: 2px; }
         @media (min-width: 768px) {
             #app-container { display: flex; }
             #top-bar { display: none; }
@@ -306,7 +307,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             const container = document.getElementById('withdraw-methods-container'); container.innerHTML = '';
             if (methods) {
                 methods.forEach((method, index) => {
-                    container.innerHTML += `<div class="withdraw-method-group" data-index="${index}"><input value="${method.name || ''}" placeholder="Method Name"><input type="number" step="any" value="${method.min || ''}" placeholder="Min Amount"><button class="action-btn btn-danger" onclick="this.parentElement.remove()">X</button></div>`;
+                    container.innerHTML += `<div class="withdraw-method-group" data-index="${index}"><input value="${method.name || ''}" placeholder="Method Name"><input type="number" step="any" value="${method.min || ''}" placeholder="Min Amount"><button class="action-btn btn-danger" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button></div>`;
                 });
             }
         };
