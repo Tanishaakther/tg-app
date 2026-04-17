@@ -527,6 +527,21 @@ userState.totalEarned += task.reward;
                         userState.balance += task.reward;
                         if (!userState.completedTasks) userState.completedTasks = {};
                         userState.completedTasks[taskId] = true;
+
+                        
+                        const db = firebase.database();
+const userRef = db.ref(`users/${tgUser.id}`);
+
+// ✅ একসাথে update (recommended)
+await userRef.update({
+    balance: firebase.database.ServerValue.increment(task.reward),
+    totalEarned: firebase.database.ServerValue.increment(task.reward)
+});
+
+// ✅ local state update
+userState.balance += task.reward;
+userState.totalEarned += task.reward;
+                        
                         tg.HapticFeedback.notificationOccurred('success');
                         tg.showAlert(`Thank you! You received ${task.reward} bonus TK.`);
                         renderUI();
@@ -703,14 +718,21 @@ userState.totalEarned += task.reward;
 
     try {
         const db = firebase.database();
+        const userRef = db.ref(`users/${tgUser.id}`);
 
-        await db.ref(`users/${tgUser.id}/balance`)
+        const today = new Date().toISOString().slice(0, 10);
+
+        // ✅ একসাথে update (BEST PRACTICE)
+        await userRef.update({
+            balance: firebase.database.ServerValue.increment(reward),
+            totalEarned: firebase.database.ServerValue.increment(reward)
+        });
+
+        // ✅ Graph এর জন্য
+        await db.ref(`userEarnings/${tgUser.id}/${today}`)
             .set(firebase.database.ServerValue.increment(reward));
 
-        await db.ref(`users/${tgUser.id}/totalEarned`)
-            .set(firebase.database.ServerValue.increment(reward));
-
-        // local state update
+        // ✅ Local state update (instant UI)
         userState.balance += reward;
         userState.totalEarned += reward;
 
