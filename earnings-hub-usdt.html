@@ -228,6 +228,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                 updateProgress(40);
 
                 await loadUserData(db); // This now depends on appConfig, so it runs after.
+                earningWalletBalance = userState.earningWallet || 0;
                 updateProgress(60);
 
                 const referralBoardPromise = db.ref('users').orderByChild('referrals').limitToLast(10).once('value');
