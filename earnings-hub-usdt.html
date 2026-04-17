@@ -531,11 +531,6 @@ userState.totalEarned += task.reward;
                         
                         
 
-// ✅ একসাথে update (recommended)
-await userRef.update({
-    balance: firebase.database.ServerValue.increment(task.reward),
-    totalEarned: firebase.database.ServerValue.increment(task.reward)
-});
 
 // ✅ local state update
 userState.balance += task.reward;
