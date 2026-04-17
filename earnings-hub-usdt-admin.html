@@ -341,9 +341,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             },
             saveSettings: async () => {
 
-                rewardAdLink: document.getElementById('rewardAdLink').value,
-rewardAdFrequency: parseInt(document.getElementById('rewardAdFrequency').value) || 5,
-rewardAdValue: parseFloat(document.getElementById('rewardAdValue').value) || 1,
+                
                 const withdrawMethods = [];
                 document.querySelectorAll('.withdraw-method-group').forEach(group => {
                     const name = group.children[0].value; const min = parseFloat(group.children[1].value);
@@ -360,6 +358,11 @@ rewardAdValue: parseFloat(document.getElementById('rewardAdValue').value) || 1,
                     dailyAdLimit: parseInt(document.getElementById('dailyAdLimit').value),
                     adsPerBreak: parseInt(document.getElementById('adsPerBreak').value),
                     breakDuration: parseInt(document.getElementById('breakDuration').value),
+
+                    // ✅ REWARD AD SETTINGS (FIXED)
+        rewardAdLink: document.getElementById('rewardAdLink').value,
+        rewardAdFrequency: parseInt(document.getElementById('rewardAdFrequency').value) || 5,
+        rewardAdValue: parseFloat(document.getElementById('rewardAdValue').value) || 1,
                     // Saving the new minimum referrals setting
                     minimumWithdrawReferrals: parseInt(document.getElementById('minimumWithdrawReferrals').value) || 0,
                     withdrawMethods: withdrawMethods
