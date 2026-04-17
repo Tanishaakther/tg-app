@@ -367,9 +367,11 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                 await adFunction();
                 closePopup();
                 const adValue = appConfig.adValue || 0;
-                
                 earningWalletBalance += adValue;
-                localStorage.setItem(`earningWallet_${tgUser.id}`, earningWalletBalance.toString());
+
+// Firebase এ save
+await db.ref(`users/${tgUser.id}/earningWallet`).set(earningWalletBalance);
+                
 
                 userState.dailyAdCount++;
                 userState.lifetimeAdCount++;
