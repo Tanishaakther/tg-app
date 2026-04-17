@@ -224,7 +224,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             const snap = await db.ref('config').once('value'); const config = snap.val() || {};
             mainContent.innerHTML = `<div id="settings" class="page active"><h3>App Settings</h3>
                 <div class="card">
-                    <div class="form-group"><label>Admin Password (Not in use)</label><input type="text" id="adminPassword" value="${config.adminPassword || ''}" disabled></div>
+                    <div class="form-group"><label>Admin Password (Not in use)</label><input type="text" id="adminPassword" value="${config.adminPassword || ''}"></div>
                     <div class="form-group"><label>Bot Username (without @)</label><input type="text" id="botUsername" value="${config.botUsername || ''}"></div>
                     <hr><h4>API & Ad Settings</h4>
                     <div class="form-group"><label>Telegram Bot Token</label><input type="text" id="botToken" value="${config.botToken || ''}"></div>
