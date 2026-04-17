@@ -117,6 +117,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+// 🔐 Admin Password Protection
+    const password = prompt("Enter Admin Password");
+    if(password !== "123456"){
+        document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>Access Denied ❌</h2>";
+        return; // stop everything
+    }
+        
         const firebaseConfig = {
 apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
   authDomain: "earnings-hub-1e8f0.firebaseapp.com",
