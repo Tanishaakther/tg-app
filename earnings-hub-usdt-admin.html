@@ -239,6 +239,23 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                     <div class="form-group"><label>Ad Network Zone ID</label><input type="number" id="adZoneId" value="${config.adZoneId || ''}"></div>
                     <div class="form-group"><label>Welcome Message</label><textarea id="welcomeMessage">${config.welcomeMessage || ''}</textarea></div><hr>
                     <h4>Earning Settings</h4>
+                    <hr>
+<h4>Reward Ad Settings</h4>
+
+<div class="form-group">
+  <label>Reward Ad Link (Monetag)</label>
+  <input type="text" id="rewardAdLink" value="${config.rewardAdLink || ''}">
+</div>
+
+<div class="form-group">
+  <label>Reward Ad Frequency (After how many Watch Ads)</label>
+  <input type="number" id="rewardAdFrequency" value="${config.rewardAdFrequency || 5}">
+</div>
+
+<div class="form-group">
+  <label>Reward Ad Value</label>
+  <input type="number" step="any" id="rewardAdValue" value="${config.rewardAdValue || 1}">
+</div>
                     <div class="form-group"><label>Value per Ad</label><input type="number" step="any" id="adValue" value="${config.adValue || 0}"></div>
                     <div class="form-group"><label>Referral Bonus</label><input type="number" step="any" id="referralBonus" value="${config.referralBonus || 0}"></div>
                     <div class="form-group"><label>Daily Ad Limit</label><input type="number" id="dailyAdLimit" value="${config.dailyAdLimit || 0}"></div>
@@ -323,6 +340,10 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                  document.getElementById('withdraw-methods-container').innerHTML += `<div class="withdraw-method-group"><input placeholder="Method Name"><input type="number" placeholder="Min Amount"><button class="action-btn btn-danger" onclick="this.parentElement.remove()">X</button></div>`;
             },
             saveSettings: async () => {
+
+                rewardAdLink: document.getElementById('rewardAdLink').value,
+rewardAdFrequency: parseInt(document.getElementById('rewardAdFrequency').value) || 5,
+rewardAdValue: parseFloat(document.getElementById('rewardAdValue').value) || 1,
                 const withdrawMethods = [];
                 document.querySelectorAll('.withdraw-method-group').forEach(group => {
                     const name = group.children[0].value; const min = parseFloat(group.children[1].value);
