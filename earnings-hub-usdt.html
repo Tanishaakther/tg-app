@@ -529,8 +529,7 @@ userState.totalEarned += task.reward;
                         userState.completedTasks[taskId] = true;
 
                         
-                        const db = firebase.database();
-const userRef = db.ref(`users/${tgUser.id}`);
+                        
 
 // ✅ একসাথে update (recommended)
 await userRef.update({
