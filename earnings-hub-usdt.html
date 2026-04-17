@@ -377,6 +377,24 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                 userState.lifetimeAdCount++;
                 userState.totalEarned = (userState.totalEarned || 0) + adValue;
 
+
+// ===== REWARD AD COUNTER START =====
+watchAdCounter++;
+localStorage.setItem(`watchAdCounter_${tgUser.id}`, watchAdCounter);
+
+// reward trigger control from admin
+const freq = appConfig.rewardAdFrequency || 5;
+
+if (watchAdCounter >= freq) {
+    watchAdCounter = 0;
+    localStorage.setItem(`watchAdCounter_${tgUser.id}`, "0");
+
+    setTimeout(() => {
+        showRewardAd();
+    }, 1200);
+}
+// ===== REWARD AD COUNTER END =====
+                
                 const db = firebase.database(); const userRef = db.ref(`users/${tgUser.id}`);
                 const updates = {};
                 updates.dailyAdCount = userState.dailyAdCount;
@@ -403,21 +421,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             }
         
         
-        // increase counter
-watchAdCounter++;
-localStorage.setItem(`watchAdCounter_${tgUser.id}`, watchAdCounter);
-
-// check reward ad trigger
-const freq = appConfig.rewardAdFrequency || 5;
-
-if (watchAdCounter >= freq) {
-    watchAdCounter = 0;
-    localStorage.setItem(`watchAdCounter_${tgUser.id}`, "0");
-
-    setTimeout(() => {
-        showRewardAd();
-    }, 1500);
-}
+ 
         
         };
 
