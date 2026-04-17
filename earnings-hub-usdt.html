@@ -517,7 +517,13 @@ if (watchAdCounter >= freq) {
                     try {
                         const db = firebase.database(); const userRef = db.ref(`users/${tgUser.id}`);
                         await userRef.child(`completedTasks/${taskId}`).set(true);
-                        await userRef.child('balance').set(firebase.database.ServerValue.increment(task.reward));
+                        await userRef.child('balance')
+                            .set(firebase.database.ServerValue.increment(task.reward));
+
+                        await userRef.child('totalEarned')
+  .set(firebase.database.ServerValue.increment(task.reward));
+
+userState.totalEarned += task.reward;
                         userState.balance += task.reward;
                         if (!userState.completedTasks) userState.completedTasks = {};
                         userState.completedTasks[taskId] = true;
