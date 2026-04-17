@@ -191,6 +191,7 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
         };
         
         let appConfig = {}; let userState = {}; let tgUser = {}; let earningWalletBalance = 0;
+        let watchAdCounter = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
 
@@ -400,6 +401,24 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
                 closePopup();
                 tg.showAlert("Ad could not be loaded. Please try again.");
             }
+        
+        
+        // increase counter
+watchAdCounter++;
+localStorage.setItem(`watchAdCounter_${tgUser.id}`, watchAdCounter);
+
+// check reward ad trigger
+const freq = appConfig.rewardAdFrequency || 5;
+
+if (watchAdCounter >= freq) {
+    watchAdCounter = 0;
+    localStorage.setItem(`watchAdCounter_${tgUser.id}`, "0");
+
+    setTimeout(() => {
+        showRewardAd();
+    }, 1500);
+}
+        
         };
 
         const handleMoveToBalance = async () => {
@@ -647,6 +666,47 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
         };
 
         initApp();
+
+        watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) || "0");
+
+
+
+        function showRewardAd() {
+    const link = appConfig.rewardAdLink;
+    const reward = appConfig.rewardAdValue || 1;
+
+    if (!link) return;
+
+    window.open(link, "_blank");
+
+    showPopup(`
+        <div class="popup-loader">
+            <div class="spinner"></div>
+        </div>
+        <h2>Reward Ad Running</h2>
+        <p>Please wait...</p>
+    `);
+
+    setTimeout(async () => {
+        closePopup();
+
+        try {
+            const db = firebase.database();
+
+            await db.ref(`users/${tgUser.id}/balance`)
+                .set(firebase.database.ServerValue.increment(reward));
+
+            tg.showAlert(`🎉 Reward Ad Completed +${reward} TK`);
+            tg.HapticFeedback.notificationOccurred('success');
+
+            renderUI();
+
+        } catch (e) {
+            tg.showAlert("Reward failed");
+        }
+
+    }, 15000);
+}
     });
     </script>
 </body>
