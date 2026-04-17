@@ -268,8 +268,15 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             
             if (!userData) {
                 // This block runs ONLY for a new user
-                const startParam = tg.initDataUnsafe.start_param;
-                const referralId = (startParam && !isNaN(startParam)) ? startParam : null;
+                
+
+const startParam = tg.initDataUnsafe.start_param;
+const referralId = startParam ? parseInt(startParam) : null;
+
+console.log("startParam:", startParam);
+console.log("referralId:", referralId);
+
+
                 
                 userData = { id: tgUser.id, firstName: tgUser.first_name || '', lastName: tgUser.last_name || '', username: tgUser.username || '', photoUrl: tgUser.photo_url || '', balance: 0, referrals: 0, referredBy: referralId, totalEarned: 0, lifetimeAdCount: 0, lastAdWatchDate: '1970-01-01', dailyAdCount: 0, breakUntil: 0, completedTasks: {}, welcomed: false };
                 await userRef.set(userData);
