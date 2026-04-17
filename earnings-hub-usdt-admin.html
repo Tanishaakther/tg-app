@@ -339,36 +339,49 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             addWithdrawMethodField: () => {
                  document.getElementById('withdraw-methods-container').innerHTML += `<div class="withdraw-method-group"><input placeholder="Method Name"><input type="number" placeholder="Min Amount"><button class="action-btn btn-danger" onclick="this.parentElement.remove()">X</button></div>`;
             },
-            saveSettings: async () => {
 
-                
-                const withdrawMethods = [];
-                document.querySelectorAll('.withdraw-method-group').forEach(group => {
-                    const name = group.children[0].value; const min = parseFloat(group.children[1].value);
-                    if (name && min) { withdrawMethods.push({ name, min }); }
-                });
-                const settings = {
-                    adminPassword: document.getElementById('adminPassword').value,
-                    botUsername: document.getElementById('botUsername').value,
-                    botToken: document.getElementById('botToken').value,
-                    adZoneId: document.getElementById('adZoneId').value,
-                    welcomeMessage: document.getElementById('welcomeMessage').value,
-                    adValue: parseFloat(document.getElementById('adValue').value),
-                    referralBonus: parseFloat(document.getElementById('referralBonus').value),
-                    dailyAdLimit: parseInt(document.getElementById('dailyAdLimit').value),
-                    adsPerBreak: parseInt(document.getElementById('adsPerBreak').value),
-                    breakDuration: parseInt(document.getElementById('breakDuration').value),
 
-                    // ✅ REWARD AD SETTINGS (FIXED)
+saveSettings: async () => {
+
+    const withdrawMethods = [];
+
+    document.querySelectorAll('.withdraw-method-group').forEach(group => {
+        const name = group.children[0].value;
+        const min = parseFloat(group.children[1].value);
+        if (name && min) {
+            withdrawMethods.push({ name, min });
+        }
+    });
+
+    const settings = {
+        adminPassword: document.getElementById('adminPassword').value,
+        botUsername: document.getElementById('botUsername').value,
+        botToken: document.getElementById('botToken').value,
+        adZoneId: document.getElementById('adZoneId').value,
+        welcomeMessage: document.getElementById('welcomeMessage').value,
+
+        adValue: parseFloat(document.getElementById('adValue').value),
+        referralBonus: parseFloat(document.getElementById('referralBonus').value),
+        dailyAdLimit: parseInt(document.getElementById('dailyAdLimit').value),
+        adsPerBreak: parseInt(document.getElementById('adsPerBreak').value),
+        breakDuration: parseInt(document.getElementById('breakDuration').value),
+
+        minimumWithdrawReferrals: parseInt(document.getElementById('minimumWithdrawReferrals').value) || 0,
+
+        // ⭐ এই 3টা গুরুত্বপূর্ণ setting
         rewardAdLink: document.getElementById('rewardAdLink').value,
         rewardAdFrequency: parseInt(document.getElementById('rewardAdFrequency').value) || 5,
         rewardAdValue: parseFloat(document.getElementById('rewardAdValue').value) || 1,
-                    // Saving the new minimum referrals setting
-                    minimumWithdrawReferrals: parseInt(document.getElementById('minimumWithdrawReferrals').value) || 0,
-                    withdrawMethods: withdrawMethods
-                };
-                await db.ref('config').update(settings); alert('Settings saved successfully!');
-            },
+
+        withdrawMethods: withdrawMethods
+    };
+
+    await db.ref('config').update(settings);
+
+    alert('Settings saved successfully!');
+}
+
+            
             sendBroadcast: async () => {
                 const message = document.getElementById('broadcast-message').value;
                 if (!message || !confirm('Are you sure you want to queue this broadcast?')) { return; }
