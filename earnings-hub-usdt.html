@@ -412,7 +412,7 @@ await db.ref(`users/${tgUser.id}/earningWallet`).set(earningWalletBalance);
                 await db.ref(`users/${tgUser.id}/balance`).set(firebase.database.ServerValue.increment(earningWalletBalance));
                 userState.balance += earningWalletBalance;
                 earningWalletBalance = 0;
-                localStorage.setItem(`earningWallet_${tgUser.id}`, '0');
+                await db.ref(`users/${tgUser.id}/earningWallet`).set(0);
                 tg.HapticFeedback.notificationOccurred('success');
                 tg.showAlert("Successfully moved to main balance!");
             } catch(error) { console.error("Failed to move balance:", error); tg.showAlert("Failed to move balance. Please try again.");
