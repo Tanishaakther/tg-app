@@ -559,7 +559,7 @@ setTimeout(async () => {
         // ✅ 👉 এইটা ADD করো (graph এর জন্য)
         const today = new Date().toISOString().slice(0, 10);
         await db.ref(`userEarnings/${tgUser.id}/${today}`)
-            .set(firebase.database.ServerValue.increment(task.reward));
+  .transaction(current => (current || 0) + task.reward);
 
         // local update
         userState.totalEarned += task.reward;
