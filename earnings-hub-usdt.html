@@ -239,45 +239,45 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                // const referralBoardPromise = db.ref('users').orderByChild('referrals').limitToLast(10).once('value');
                // const earningBoardPromise = db.ref('users').orderByChild('totalEarned').limitToLast(10).once('value');
 
-firebase.database().ref('users')
-  .orderByChild('referrals')
-  .limitToLast(10)
-  .on('value', (snapshot) => {
-      leaderboardData.referral = [];
+function setupLeaderboardListeners() {
+    const db = firebase.database();
 
-      snapshot.forEach(child => {
-          leaderboardData.referral.push(child.val());
+    db.ref('users')
+      .orderByChild('referrals')
+      .limitToLast(10)
+      .on('value', snap => {
+          leaderboardData.referral = [];
+          snap.forEach(c => leaderboardData.referral.push(c.val()));
+          leaderboardData.referral.reverse();
+          renderLeaderboard();
       });
 
-      leaderboardData.referral.reverse();
-
-      renderLeaderboard();
-  });
+    db.ref('users')
+      .orderByChild('totalEarned')
+      .limitToLast(10)
+      .on('value', snap => {
+          leaderboardData.earning = [];
+          snap.forEach(c => leaderboardData.earning.push(c.val()));
+          leaderboardData.earning.reverse();
+          renderLeaderboard();
+      });
+}
                 
-firebase.database().ref('users')
-  .orderByChild('totalEarned')
-  .limitToLast(10)
-  .on('value', (snapshot) => {
-      leaderboardData.earning = [];
 
-      snapshot.forEach(child => {
-          leaderboardData.earning.push(child.val());
-      });
+                
 
-      leaderboardData.earning.reverse();
-
-      renderLeaderboard(); // 🔥 instant update
-  });
 
         
                 const historyPromise = loadTransactionHistory(db);
 
-                const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise]);
+                // const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise]);
                 updateProgress(80);
 
-                referralBoardSnap.forEach(child => { leaderboardData.referral.push(child.val()); });
-                earningBoardSnap.forEach(child => { leaderboardData.earning.push(child.val()); });
-                leaderboardData.referral.reverse(); leaderboardData.earning.reverse();
+                const historyPromise = loadTransactionHistory(db);
+await historyPromise;
+                // referralBoardSnap.forEach(child => { leaderboardData.referral.push(child.val()); });
+               // earningBoardSnap.forEach(child => { leaderboardData.earning.push(child.val()); });
+               // leaderboardData.referral.reverse(); leaderboardData.earning.reverse();
                 updateProgress(90);
 
                 loadAdSdk(appConfig.adZoneId);
