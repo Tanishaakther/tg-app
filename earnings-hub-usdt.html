@@ -330,9 +330,7 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                 renderUI(); setupNavigation(); setupEventListeners();
                 updateProgress(100);
 
-                setTimeout(() => {
-    renderAllAds();
-}, 800);
+                
                 setTimeout(() => {
                     document.getElementById('app-loader').style.display = 'none';
                     document.getElementById('app').style.display = 'block';
@@ -811,6 +809,8 @@ setTimeout(async () => {
         };
 
 appConfig.ads = appConfig.ads || {};
+renderAllAds();
+
         
         initApp();
 
