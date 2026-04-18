@@ -294,8 +294,15 @@ console.log("referralId:", referralId);
                         // We use transactions for safety to avoid race conditions.
                         await referrerRef.update({
   balance: firebase.database.ServerValue.increment(bonusAmount),
+  totalEarned: firebase.database.ServerValue.increment(bonusAmount),
   referrals: firebase.database.ServerValue.increment(1)
 });
+
+// 👉 7 days earnings graph এর জন্য
+const today = new Date().toISOString().slice(0, 10);
+await firebase.database()
+  .ref(`userEarnings/${referralId}/${today}`)
+  .transaction(current => (current || 0) + bonusAmount);
                     } else {
                         // If no bonus, still increment the referral count
                         await referrerRef.update({
