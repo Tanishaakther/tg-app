@@ -398,19 +398,20 @@ const freq = appConfig.rewardAdFrequency || 5;
 
 
 
-
-
-if (freq > 0 && watchAdCounter >= freq && !rewardLock) {
+if (freq > 0 && watchAdCounter === freq && !rewardLock) {
     rewardLock = true;
     watchAdCounter = 0;
 
     localStorage.setItem(`watchAdCounter_${tgUser.id}`, "0");
 
+    showRewardAd();
+
     setTimeout(() => {
-        showRewardAd();
         rewardLock = false;
-    }, 1200);
+    }, 1200); // reward ad duration
 }
+
+
         
 // ===== REWARD AD COUNTER END =====
                 
