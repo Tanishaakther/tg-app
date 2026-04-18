@@ -248,9 +248,14 @@ let rewardLock = false;
 
 function renderAd(id, code) {
     const el = document.getElementById(id);
-    if (!el || !code) return;
+    if (!el || !code || code.trim() === "") return;
 
-    el.innerHTML = `<div style="margin:10px 0">${code}</div>`;
+    el.innerHTML = "";
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = code;
+
+    el.appendChild(wrapper);
 }
 
 
