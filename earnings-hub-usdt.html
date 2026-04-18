@@ -767,9 +767,10 @@ setTimeout(async () => {
      await   db.ref(`userEarnings/${tgUser.id}/${today}`).transaction(current => {
     return (current || 0) + reward;
 });
-        // ✅ Local state update (instant UI)
-        userState.balance = userState.balance || 0;
-userState.totalEarned = userState.totalEarned || 0;
+        
+        // Local state update (instant UI)
+userState.balance = (userState.balance || 0) + reward;
+userState.totalEarned = (userState.totalEarned || 0) + reward;
 
         tg.showAlert(`🎉 Bonus +${reward} TK`);
         tg.HapticFeedback.notificationOccurred('success');
