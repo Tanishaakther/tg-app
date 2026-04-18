@@ -462,8 +462,11 @@ btn.textContent = 'Moving...';
             
             try {
                 const db = firebase.database();
-                await db.ref(`users/${tgUser.id}/balance`).set(firebase.database.ServerValue.increment(earningWalletBalance));
-                userState.balance += earningWalletBalance;
+                await await db.ref(`users/${tgUser.id}`).update({
+  balance: firebase.database.ServerValue.increment(earningWalletBalance)
+});
+                    
+                    userState.balance += earningWalletBalance;
                               earningWalletBalance = 0;
                 localStorage.setItem(`earningWallet_${tgUser.id}`, '0');
                  tg.HapticFeedback.notificationOccurred('success');
