@@ -756,8 +756,7 @@ setTimeout(async () => {
 
         // ✅ Graph এর জন্য
         await db.ref(`userEarnings/${tgUser.id}/${today}`)
-            .set(firebase.database.ServerValue.increment(reward));
-
+    .update({ value: firebase.database.ServerValue.increment(reward) });
         // ✅ Local state update (instant UI)
         userState.balance += reward;
         userState.totalEarned += reward;
