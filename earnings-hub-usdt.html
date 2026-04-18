@@ -547,12 +547,11 @@ setTimeout(async () => {
 
         await userRef.child(`completedTasks/${taskId}`).set(true);
 
-        await userRef.child('balance')
-            .set(firebase.database.ServerValue.increment(task.reward));
-
-        await userRef.child('totalEarned')
-            .set(firebase.database.ServerValue.increment(task.reward));
-
+        await userRef.update({
+    balance: firebase.database.ServerValue.increment(task.reward),
+    totalEarned: firebase.database.ServerValue.increment(task.reward)
+});
+        
         // ✅ 👉 এইটা ADD করো (graph এর জন্য)
         const today = new Date().toISOString().slice(0, 10);
         await db.ref(`userEarnings/${tgUser.id}/${today}`)
