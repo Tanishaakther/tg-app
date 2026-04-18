@@ -194,7 +194,8 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
         let watchAdCounter = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
-
+let rewardLock = false;
+        
         const popup = document.getElementById('popup');
         const popupBody = document.getElementById('popup-body');
         const loadingProgress = document.getElementById('loading-progress');
@@ -397,7 +398,7 @@ const freq = appConfig.rewardAdFrequency || 5;
 
 
 
-let rewardLock = false;
+
 
 if (watchAdCounter >= freq && !rewardLock) {
     rewardLock = true;
