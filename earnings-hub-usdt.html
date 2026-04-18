@@ -400,7 +400,7 @@ const freq = appConfig.rewardAdFrequency || 5;
 
 
 
-if (watchAdCounter >= freq && !rewardLock) {
+if (freq > 0 && watchAdCounter >= freq && !rewardLock) {
     rewardLock = true;
     watchAdCounter = 0;
 
