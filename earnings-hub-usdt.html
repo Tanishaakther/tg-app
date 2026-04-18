@@ -852,10 +852,11 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
 
 }, 15000);
 }
-    });
 
 
-        const renderAllAds = () => {
+
+
+const renderAllAds = () => {
     renderAd("home-ad-1", appConfig.ads?.home?.ad1);
     renderAd("home-ad-2", appConfig.ads?.home?.ad2);
 
@@ -867,6 +868,12 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
     renderAd("profile-ad-1", appConfig.ads?.profile?.ad1);
     renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
 };
+
+        
+    });
+
+
+        
     </script>
 </body>
 </html>
