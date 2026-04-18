@@ -429,8 +429,8 @@ if (freq > 0 && watchAdCounter === freq && !rewardLock) {
                 await userRef.update(updates);
                 
                 const today = new Date().toISOString().slice(0, 10);
-                await db.ref(`userEarnings/${tgUser.id}/${today}`).set(adValue);
-                    
+                  await db.ref(`userEarnings/${tgUser.id}/${today}`)
+  .transaction(current => (current || 0) + adValue);
                     
                     
                     
