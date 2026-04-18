@@ -218,6 +218,9 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
             tg.ready(); tg.expand();
             document.body.className = `${tg.colorScheme}-theme`;
             tgUser = tg.initDataUnsafe.user;
+
+            // ✅ AFTER tgUser পাওয়া গেছে
+watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) || "0");
             if (!tgUser || !tgUser.id) { tg.showAlert("User data not found.", () => tg.close()); return; }
 
             try {
@@ -701,7 +704,6 @@ setTimeout(async () => {
                 });
             }
         };
-watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) || "0");
         initApp();
 
         
