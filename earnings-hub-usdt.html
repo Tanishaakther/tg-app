@@ -286,7 +286,7 @@ console.log("referralId:", referralId);
                 await userRef.set(userData);
                 
                 // If there's a valid referrer, credit them.
-                if (referralId && referralId != tgUser.id) {
+                if (referralId && Number(referralId) !== Number(tgUser.id)) {
                     const referrerRef = db.ref(`users/${referralId}`);
                     const bonusAmount = parseFloat(appConfig.referralBonus || 0);
                     
