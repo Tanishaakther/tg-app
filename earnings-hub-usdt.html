@@ -275,7 +275,7 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                 
 
 const startParam = tg.initDataUnsafe.start_param;
-const referralId = startParam ? parseInt(startParam) : null;
+const referralId = startParam && !isNaN(startParam) ? Number(startParam) : null;
 
 console.log("startParam:", startParam);
 console.log("referralId:", referralId);
