@@ -235,11 +235,25 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
   measurementId: "G-XYECHZ70BS"
         };
         
-        let appConfig = {}; let userState = {}; let tgUser = {}; let earningWalletBalance = 0;
+        let appConfig = {}; 
+        let userState = {}; 
+        let tgUser = {}; 
+        let earningWalletBalance = 0;
         let watchAdCounter = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
 let rewardLock = false;
+
+
+
+function renderAd(id, code) {
+    const el = document.getElementById(id);
+    if (!el || !code) return;
+
+    el.innerHTML = `<div style="margin:10px 0">${code}</div>`;
+}
+
+
         
         const popup = document.getElementById('popup');
         const popupBody = document.getElementById('popup-body');
@@ -828,12 +842,7 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
         tg.HapticFeedback.notificationOccurred('success');
 
 
-function renderAd(id, code) {
-    const el = document.getElementById(id);
-    if (!el || !code) return;
 
-    el.innerHTML = `<div style="margin:10px 0">${code}</div>`;
-}
 // HOME
 renderAd("home-ad-1", appConfig.ads?.home?.ad1);
 renderAd("home-ad-2", appConfig.ads?.home?.ad2);
