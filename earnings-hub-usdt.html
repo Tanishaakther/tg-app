@@ -701,11 +701,10 @@ setTimeout(async () => {
                 });
             }
         };
-
+watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) || "0");
         initApp();
 
-        watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) || "0");
-
+        
 
 
         function showRewardAd() {
