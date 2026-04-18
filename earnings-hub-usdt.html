@@ -252,10 +252,22 @@ function renderAd(id, code) {
 
     el.innerHTML = "";
 
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = code;
+    const container = document.createElement("div");
+    container.innerHTML = code;
 
-    el.appendChild(wrapper);
+    // 🔥 IMPORTANT: re-run scripts
+    container.querySelectorAll("script").forEach(oldScript => {
+        const newScript = document.createElement("script");
+
+        [...oldScript.attributes].forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+        });
+
+        newScript.text = oldScript.text;
+        oldScript.replaceWith(newScript);
+    });
+
+    el.appendChild(container);
 }
 
 
