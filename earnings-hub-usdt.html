@@ -283,7 +283,11 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                 // This block runs ONLY for a new user
                 
 
-const startParam = tg.initDataUnsafe.start_param;
+
+                const startParam =
+    tg.initDataUnsafe.start_param ||
+    new URLSearchParams(window.location.search).get('startapp') ||
+    new URLSearchParams(window.location.search).get('start');
 const referralId = startParam && !isNaN(startParam) ? Number(startParam) : null;
 
 console.log("startParam:", startParam);
