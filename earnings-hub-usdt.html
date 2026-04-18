@@ -419,7 +419,7 @@ if (freq > 0 && watchAdCounter >= freq && !rewardLock) {
                 updates.dailyAdCount = userState.dailyAdCount;
                 updates.lifetimeAdCount = userState.lifetimeAdCount;
                 updates.totalEarned = userState.totalEarned;
-                if ((userState.dailyAdCount) % appConfig.adsPerBreak === 0 && appConfig.adsPerBreak > 0) {
+                if (appConfig.adsPerBreak > 0 && userState.dailyAdCount % appConfig.adsPerBreak === 0) {
                     updates.breakUntil = Date.now() + (appConfig.breakDuration * 60000);
                     userState.breakUntil = updates.breakUntil;
                 }
