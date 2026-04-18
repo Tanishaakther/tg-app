@@ -464,7 +464,7 @@ btn.textContent = 'Moving...';
             
             try {
                 const db = firebase.database();
-                await await db.ref(`users/${tgUser.id}`).update({
+                await db.ref(`users/${tgUser.id}`).update({
   balance: firebase.database.ServerValue.increment(earningWalletBalance)
 });
                     
