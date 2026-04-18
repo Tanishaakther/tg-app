@@ -292,13 +292,10 @@ console.log("referralId:", referralId);
                     
                     if (bonusAmount > 0) {
                         // We use transactions for safety to avoid race conditions.
-                        await referrerRef.transaction(currentData => {
-                            if (currentData) {
-                                currentData.balance = (currentData.balance || 0) + bonusAmount;
-                                currentData.referrals = (currentData.referrals || 0) + 1;
-                            }
-                            return currentData;
-                        });
+                        await referrerRef.update({
+  balance: firebase.database.ServerValue.increment(bonusAmount),
+  referrals: firebase.database.ServerValue.increment(1)
+});
                     } else {
                         // If no bonus, still increment the referral count
                         await referrerRef.update({
