@@ -309,11 +309,11 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
     await userRef.set(userData);
 
     // ✅ Referral reward
-    if (
-        referralId &&
-        referralId !== tgUser.id &&
-        !userData.referredByProcessed
-    ) {
+
+                if (referralId && referralId !== tgUser.id) {
+    const processedSnap = await userRef.child('referredByProcessed').once('value');
+
+    if (!processedSnap.val()) {
         const referrerRef = db.ref(`users/${referralId}`);
         const referrerSnap = await referrerRef.once('value');
 
@@ -328,6 +328,7 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
             });
         }
     }
+                }
 }
             }
             
