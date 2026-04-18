@@ -309,6 +309,14 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                 updateProgress(40);
 
                 await loadUserData(db); // This now depends on appConfig, so it runs after.
+               
+                
+                
+                appConfig.ads = appConfig.ads || {};
+
+renderAllAds();
+
+
                 
                 updateProgress(60);
 
@@ -808,10 +816,7 @@ setTimeout(async () => {
             }
         };
 
-appConfig.ads = appConfig.ads || {};
-renderAllAds();
 
-        
         initApp();
 
         
