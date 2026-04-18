@@ -395,14 +395,22 @@ localStorage.setItem(`watchAdCounter_${tgUser.id}`, watchAdCounter);
 // reward trigger control from admin
 const freq = appConfig.rewardAdFrequency || 5;
 
-if (watchAdCounter >= freq) {
+
+
+let rewardLock = false;
+
+if (watchAdCounter >= freq && !rewardLock) {
+    rewardLock = true;
     watchAdCounter = 0;
+
     localStorage.setItem(`watchAdCounter_${tgUser.id}`, "0");
 
     setTimeout(() => {
         showRewardAd();
+        rewardLock = false;
     }, 1200);
 }
+        
 // ===== REWARD AD COUNTER END =====
                 
                 const db = firebase.database(); const userRef = db.ref(`users/${tgUser.id}`);
@@ -437,11 +445,15 @@ if (watchAdCounter >= freq) {
 
         const handleMoveToBalance = async () => {
             if(earningWalletBalance < 10) { tg.showAlert("You need at least 10 TK to move."); return; }
-            const btn = document.getElementById('move-to-balance-btn'); btn.dis
-                
+
+const btn = document.getElementById('move-to-balance-btn');
+btn.disabled = true;
+btn.textContent = 'Moving...';
+
+
+
             
             
-            abled = true; btn.textContent = 'Moving...';
             try {
                 const db = firebase.database();
                 await db.ref(`users/${tgUser.id}/balance`).set(firebase.database.ServerValue.increment(earningWalletBalance));
@@ -671,8 +683,7 @@ setTimeout(async () => {
             }
         };
 
-        const renderReferralSection = () => {
-            const container = document.getElementById('referral-section');
+        const renderReferralSection = () =Rew          const container = document.getElementById('referral-section');
             const refLink = `https://t.me/${appConfig.botUsername}/app?startapp=${tgUser.id}`;
             container.innerHTML = `<div class="task-container" style="flex-direction: column; align-items: stretch;"><h3>Refer & Earn More!</h3><p>Invite friends and earn ${appConfig.referralBonus || 0} TK per referral.</p><input type="text" id="referral-link" value="${refLink}" readonly style="padding: 10px; text-align: center; border-radius: 8px; border: 1px dashed var(--primary-color); margin: 10px 0;"><button id="copy-ref-link-btn" class="action-btn">Copy Link</button></div>`;
         };
@@ -721,7 +732,7 @@ setTimeout(async () => {
         <div class="popup-loader">
             <div class="spinner"></div>
         </div>
-        <h2>Reward Ad Running</h2>
+        <h2>Bonus Earnings Running</h2>
         <p>Please wait...</p>
     `);
 
