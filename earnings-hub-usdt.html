@@ -299,25 +299,25 @@ console.log("referralId:", referralId);
                 await userRef.set(userData);
                 
                 // If there's a valid referrer, credit them.
-                if (referralId && Number(referralId) !== Number(tgUser.id)) {
-                    const referrerRef = db.ref(`users/${referralId}`);
-                    const bonusAmount = parseFloat(appConfig.referralBonus || 0);
-                    
-                    if (bonusAmount > 0) {
-                        // We use transactions for safety to avoid race conditions.
-                        await referrerRef.transaction(currentData => {
-                            if (currentData) {
-                                currentData.balance = (currentData.balance || 0) + bonusAmount;
-                                currentData.referrals = (currentData.referrals || 0) + 1;
-                            }
-                            return currentData;
-                        });
-                    } else {
-                        // If no bonus, still increment the referral count
-                        await referrerRef.update({
-  referrals: firebase.database.ServerValue.increment(1)
-});
-                    }
+                if (referralId && referralId !== tgUser.id) {
+    const referrerRef = db.ref(`users/${referralId}`);
+
+    // check duplicate referral
+    if (!userData.referredByProcessed) {
+
+        await referrerRef.transaction(currentData => {
+            if (currentData) {
+                currentData.balance = (currentData.balance || 0) + (appConfig.referralBonus || 0);
+                currentData.referrals = (currentData.referrals || 0) + 1;
+            }
+            return currentData;
+        });
+
+        // mark as processed (VERY IMPORTANT)
+        await userRef.update({
+            referredByProcessed: true
+        });
+    }
                 }
             }
             
