@@ -775,6 +775,9 @@ setTimeout(async () => {
                 });
             }
         };
+
+appConfig.ads = appConfig.ads || {};
+        
         initApp();
 
         
@@ -824,6 +827,28 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
         tg.showAlert(`🎉 Bonus +${reward} TK`);
         tg.HapticFeedback.notificationOccurred('success');
 
+
+function renderAd(id, code) {
+    const el = document.getElementById(id);
+    if (!el || !code) return;
+
+    el.innerHTML = `<div style="margin:10px 0">${code}</div>`;
+}
+// HOME
+renderAd("home-ad-1", appConfig.ads?.home?.ad1);
+renderAd("home-ad-2", appConfig.ads?.home?.ad2);
+
+// TASKS
+renderAd("tasks-ad-1", appConfig.ads?.tasks?.ad1);
+renderAd("tasks-ad-2", appConfig.ads?.tasks?.ad2);
+
+// LEADERBOARD
+renderAd("leaderboard-ad-1", appConfig.ads?.leaderboard?.ad1);
+
+// PROFILE
+renderAd("profile-ad-1", appConfig.ads?.profile?.ad1);
+renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
+        
         renderUI();
 
     } catch (e) {
