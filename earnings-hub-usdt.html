@@ -843,20 +843,6 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
 
 
 
-// HOME
-renderAd("home-ad-1", appConfig.ads?.home?.ad1);
-renderAd("home-ad-2", appConfig.ads?.home?.ad2);
-
-// TASKS
-renderAd("tasks-ad-1", appConfig.ads?.tasks?.ad1);
-renderAd("tasks-ad-2", appConfig.ads?.tasks?.ad2);
-
-// LEADERBOARD
-renderAd("leaderboard-ad-1", appConfig.ads?.leaderboard?.ad1);
-
-// PROFILE
-renderAd("profile-ad-1", appConfig.ads?.profile?.ad1);
-renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
         
         renderUI();
 
@@ -867,6 +853,20 @@ renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
 }, 15000);
 }
     });
+
+
+        const renderAllAds = () => {
+    renderAd("home-ad-1", appConfig.ads?.home?.ad1);
+    renderAd("home-ad-2", appConfig.ads?.home?.ad2);
+
+    renderAd("tasks-ad-1", appConfig.ads?.tasks?.ad1);
+    renderAd("tasks-ad-2", appConfig.ads?.tasks?.ad2);
+
+    renderAd("leaderboard-ad-1", appConfig.ads?.leaderboard?.ad1);
+
+    renderAd("profile-ad-1", appConfig.ads?.profile?.ad1);
+    renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
+};
     </script>
 </body>
 </html>
