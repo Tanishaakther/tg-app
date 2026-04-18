@@ -768,8 +768,8 @@ setTimeout(async () => {
     return (current || 0) + reward;
 });
         // ✅ Local state update (instant UI)
-        userState.balance += reward;
-        userState.totalEarned += reward;
+        userState.balance = (userState.balance || 0) + reward;
+userState.totalEarned = (userState.totalEarned || 0) + reward;
 
         tg.showAlert(`🎉 Bonus +${reward} TK`);
         tg.HapticFeedback.notificationOccurred('success');
