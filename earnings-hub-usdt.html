@@ -268,16 +268,15 @@ function setupLeaderboardListeners() {
 
 
         
-               // const historyPromise = loadTransactionHistory(db);
+               const historyPromise = loadTransactionHistory(db);
 
-                // const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise]);
+                 const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise]);
                 updateProgress(80);
 
-                const historyPromise = loadTransactionHistory(db);
-await historyPromise;
-                // referralBoardSnap.forEach(child => { leaderboardData.referral.push(child.val()); });
-               // earningBoardSnap.forEach(child => { leaderboardData.earning.push(child.val()); });
-               // leaderboardData.referral.reverse(); leaderboardData.earning.reverse();
+                
+                referralBoardSnap.forEach(child => { leaderboardData.referral.push(child.val()); });
+                earningBoardSnap.forEach(child => { leaderboardData.earning.push(child.val()); });
+                leaderboardData.referral.reverse(); leaderboardData.earning.reverse();
                 updateProgress(90);
 
                 loadAdSdk(appConfig.adZoneId);
