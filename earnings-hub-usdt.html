@@ -236,32 +236,10 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                 
                 updateProgress(60);
 
-               // const referralBoardPromise = db.ref('users').orderByChild('referrals').limitToLast(10).once('value');
-               // const earningBoardPromise = db.ref('users').orderByChild('totalEarned').limitToLast(10).once('value');
+                const referralBoardPromise = db.ref('users').orderByChild('referrals').limitToLast(10).once('value');
+                const earningBoardPromise = db.ref('users').orderByChild('totalEarned').limitToLast(10).once('value');
 
-function setupLeaderboardListeners() {
-    const db = firebase.database();
 
-    db.ref('users')
-      .orderByChild('referrals')
-      .limitToLast(10)
-      .on('value', snap => {
-          leaderboardData.referral = [];
-          snap.forEach(c => leaderboardData.referral.push(c.val()));
-          leaderboardData.referral.reverse();
-          renderLeaderboard();
-      });
-
-    db.ref('users')
-      .orderByChild('totalEarned')
-      .limitToLast(10)
-      .on('value', snap => {
-          leaderboardData.earning = [];
-          snap.forEach(c => leaderboardData.earning.push(c.val()));
-          leaderboardData.earning.reverse();
-          renderLeaderboard();
-      });
-}
                 
 
                 
