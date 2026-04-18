@@ -299,8 +299,13 @@ console.log("referralId:", referralId);
                 await userRef.set(userData);
                 
                 // If there's a valid referrer, credit them.
-                if (referralId && referralId !== tgUser.id) {
-    const referrerRef = db.ref(`users/${referralId}`);
+               if (referralId && referralId !== tgUser.id) {
+    const referrerSnap = await db.ref(`users/${referralId}`).once('value');
+
+    if (referrerSnap.exists()) {
+        // then give bonus
+    }
+}
 
     // check duplicate referral
     if (!userData.referredByProcessed) {
