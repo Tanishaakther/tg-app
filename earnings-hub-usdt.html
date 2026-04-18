@@ -301,7 +301,9 @@ console.log("referralId:", referralId);
                         });
                     } else {
                         // If no bonus, still increment the referral count
-                        await referrerRef.child('referrals').set(firebase.database.ServerValue.increment(1));
+                        await referrerRef.update({
+  referrals: firebase.database.ServerValue.increment(1)
+});
                     }
                 }
             }
