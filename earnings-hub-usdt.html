@@ -139,9 +139,19 @@
         <main id="main-content">
             <div id="home-page" class="page active">
 
-<!--home-ad-1-->
-<div id="home-ad-1"></div>
-
+<!--home ad 1-->
+<div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
 
                 
                 <div class="stats-grid">
@@ -155,6 +165,29 @@
                     <div id="earnings-chart" class="chart"></div><div id="earnings-chart-labels" class="chart-labels"></div>
                 </div>
                 <div id="dynamic-links-container" style="margin-top: 20px;"></div>
+
+                
+                <!--home ad 2-->
+ <div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
+
+
+                
+            </div>
+            <div id="tasks-page" class="page">
+
+                
+<!--tasks-ad-1-->
 <div class="ad-box">
 <script>
   atOptions = {
@@ -167,16 +200,6 @@
 </script>
 <script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
 </div>
-<!--home-ad-2-->
-<div id="home-ad-2"></div>
-
-                
-            </div>
-            <div id="tasks-page" class="page">
-
-                
-<!--tasks-ad-1-->
-<div id="tasks-ad-1"></div>
 
                 
                 <div class="earning-wallet-card">
@@ -191,14 +214,36 @@
             
 
 <!--tasks-ad-2-->
-<div id="tasks-ad-2"></div>
+<div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
                 
             
             </div>
             <div id="leaderboard-page" class="page">
 
 <!--leaderboard-ad-1-->
-<div id="leaderboard-ad-1"></div>
+<div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
                 
                 <h2>Leaderboard</h2>
                 <div class="leaderboard-toggle">
@@ -212,7 +257,18 @@
 
             
 <!--profile-ad-1-->
-<div id="profile-ad-1"></div>
+<div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
 
 
                     
@@ -225,7 +281,18 @@
 
 
 <!--profile-ad-2-->
-<div id="profile-ad-2"></div>
+<div class="ad-box">
+<script>
+  atOptions = {
+    'key' : '75d78373dc96d523f0e1ef413769fddf',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
 
 
 
@@ -267,33 +334,6 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
         let userTransactions = [];
 let rewardLock = false;
 
-function renderAd(id, code) {
-    const el = document.getElementById(id);
-    if (!el || !code || code.trim() === "") return;
-
-    el.innerHTML = "";
-
-    const container = document.createElement("div");
-    container.innerHTML = code;
-
-    // ✅ ONLY ONE script execution
-    const scripts = container.querySelectorAll("script");
-
-    scripts.forEach(oldScript => {
-        const newScript = document.createElement("script");
-
-        if (oldScript.src) {
-            newScript.src = oldScript.src;
-            newScript.async = true;
-        } else {
-            newScript.textContent = oldScript.textContent;
-        }
-
-        document.body.appendChild(newScript);
-    });
-
-    el.appendChild(container);
-}
 
 
 
@@ -338,9 +378,7 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                
                 
                 
-                appConfig.ads = appConfig.ads || {};
-
-renderAllAds();
+                
 
 
                 
@@ -906,19 +944,6 @@ userState.totalEarned = (userState.totalEarned || 0) + reward;
 
 
 
-
-const renderAllAds = () => {
-    renderAd("home-ad-1", appConfig.ads?.home?.ad1);
-    renderAd("home-ad-2", appConfig.ads?.home?.ad2);
-
-    renderAd("tasks-ad-1", appConfig.ads?.tasks?.ad1);
-    renderAd("tasks-ad-2", appConfig.ads?.tasks?.ad2);
-
-    renderAd("leaderboard-ad-1", appConfig.ads?.leaderboard?.ad1);
-
-    renderAd("profile-ad-1", appConfig.ads?.profile?.ad1);
-    renderAd("profile-ad-2", appConfig.ads?.profile?.ad2);
-};
 
         
     });
