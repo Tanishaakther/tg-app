@@ -264,60 +264,6 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
 
 
 
-<h4>Adsterra Banner Ads</h4>
-
-<h5>🏠 Home Page</h5>
-
-<div class="form-group">
-    <label>Home Ad 1</label>
-    <textarea id="ads_home_1"></textarea>
-</div>
-
-<div class="form-group">
-    <label>Home Ad 2</label>
-    <textarea id="ads_home_2"></textarea>
-</div>
-
-<h5>📋 Tasks Page</h5>
-
-<div class="form-group">
-    <label>Tasks Ad 1</label>
-    <textarea id="ads_tasks_1"></textarea>
-</div>
-
-<div class="form-group">
-    <label>Tasks Ad 2</label>
-    <textarea id="ads_tasks_2"></textarea>
-</div>
-
-<h5>🏆 Leaderboard</h5>
-
-<div class="form-group">
-    <label>Leaderboard Ad 1</label>
-    <textarea id="ads_leaderboard_1"></textarea>
-</div>
-
-<h5>👤 Profile Page</h5>
-
-<div class="form-group">
-    <label>Profile Ad 1</label>
-    <textarea id="ads_profile_1"></textarea>
-</div>
-
-<div class="form-group">
-    <label>Profile Ad 2</label>
-    <textarea id="ads_profile_2"></textarea>
-</div>
-
-
-
-
-
-
-
-
-
-
 
                    <hr><h4>Referral Earning Settings</h4><hr>
                    <div class="form-group"><label>Referral Bonus Earning Amount</label><input type="number" step="any" id="referralBonus" value="${config.referralBonus || 0}"></div>
@@ -441,27 +387,7 @@ saveSettings: async () => {
 
 
 
-	const adsData = {
-    home: {
-        ad1: document.getElementById("ads_home_1").value,
-        ad2: document.getElementById("ads_home_2").value
-    },
-    tasks: {
-        ad1: document.getElementById("ads_tasks_1").value,
-        ad2: document.getElementById("ads_tasks_2").value
-    },
-    leaderboard: {
-        ad1: document.getElementById("ads_leaderboard_1").value
-    },
-    profile: {
-        ad1: document.getElementById("ads_profile_1").value,
-        ad2: document.getElementById("ads_profile_2").value
-    }
-};
-
-// Firebase save
-firebase.database().ref("config/ads").set(adsData);
-
+	
 
 
 
