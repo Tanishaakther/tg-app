@@ -244,8 +244,6 @@ apiKey: "AIzaSyCMjtCejGTeJZ_wc9BqcQZciNpdhuKMwUc",
         let userTransactions = [];
 let rewardLock = false;
 
-
-
 function renderAd(id, code) {
     const el = document.getElementById(id);
     if (!el || !code || code.trim() === "") return;
@@ -253,37 +251,27 @@ function renderAd(id, code) {
     el.innerHTML = "";
 
     const container = document.createElement("div");
-container.innerHTML = code;
+    container.innerHTML = code;
 
-// 🔥 FIX: clear previous scripts
-const scripts = container.querySelectorAll("script");
+    // ✅ ONLY ONE script execution
+    const scripts = container.querySelectorAll("script");
 
-scripts.forEach((oldScript) => {
-    const newScript = document.createElement("script");
-
-    if (oldScript.src) {
-        newScript.src = oldScript.src + "?v=" + Date.now(); // force reload
-    } else {
-        newScript.textContent = oldScript.textContent;
-    }
-
-    document.body.appendChild(newScript);
-});
-
-    // 🔥 IMPORTANT: re-run scripts
-    container.querySelectorAll("script").forEach(oldScript => {
+    scripts.forEach(oldScript => {
         const newScript = document.createElement("script");
 
-        [...oldScript.attributes].forEach(attr => {
-            newScript.setAttribute(attr.name, attr.value);
-        });
+        if (oldScript.src) {
+            newScript.src = oldScript.src;
+            newScript.async = true;
+        } else {
+            newScript.textContent = oldScript.textContent;
+        }
 
-        newScript.text = oldScript.text;
-        oldScript.replaceWith(newScript);
+        document.body.appendChild(newScript);
     });
 
     el.appendChild(container);
 }
+
 
 
         
