@@ -112,6 +112,19 @@
         .rank { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); width: 40px; }
         .leaderboard-item img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
         .leaderboard-name { font-weight: 600; flex-grow: 1; } .leaderboard-score { font-weight: 600; color: var(--primary-color); }
+   
+    .ad-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.ad-box iframe {
+    max-width: 100%;
+    border: none;
+}
+    
     </style>
 </head>
 <body>
@@ -142,7 +155,7 @@
                     <div id="earnings-chart" class="chart"></div><div id="earnings-chart-labels" class="chart-labels"></div>
                 </div>
                 <div id="dynamic-links-container" style="margin-top: 20px;"></div>
-
+<div class="ad-box">
 <script>
   atOptions = {
     'key' : '75d78373dc96d523f0e1ef413769fddf',
@@ -153,6 +166,7 @@
   };
 </script>
 <script src="https://avouchlawsrethink.com/75d78373dc96d523f0e1ef413769fddf/invoke.js"></script>
+</div>
 <!--home-ad-2-->
 <div id="home-ad-2"></div>
 
