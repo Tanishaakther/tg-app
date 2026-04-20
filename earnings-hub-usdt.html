@@ -134,7 +134,7 @@
         <header class="profile-header">
             <img id="user-photo" src="https://via.placeholder.com/80" alt="User">
             <h1 id="user-name">Loading...</h1>
-            <div id="user-balance-container">Main Balance: <span id="user-balance">0.00</span>$</div>
+            <div id="user-balance-container">Main Balance: <span id="user-balance">0.00</span> $</div>
         </header>
         <main id="main-content">
             <div id="home-page" class="page active">
@@ -154,7 +154,7 @@
                 <div class="earning-wallet-card">
                     <h3>Earning Wallet</h3>
                     <p style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin: 10px 0;"><span id="earning-wallet-balance">0.00</span> $</p>
-                    <small>Minimum 10$ to move to main balance.</small>
+                    <small>Minimum 10 $ to move to main balance.</small>
                     <button id="move-to-balance-btn" class="action-btn" style="width:100%; margin-top: 15px;" disabled>Move to Main Balance</button>
                 </div>
                 <div id="ad-progress-container" class="progress-container" style="margin-top:20px;"></div>
@@ -607,7 +607,7 @@ setTimeout(async () => {
         userState.completedTasks[taskId] = true;
 
         tg.HapticFeedback.notificationOccurred('success');
-        tg.showAlert(`Thank you! You received ${task.reward}$ bonus.`);
+        tg.showAlert(`Thank you! You received ${task.reward} $ bonus.`);
         renderUI();
 
     } catch (error) {
@@ -720,7 +720,7 @@ setTimeout(async () => {
                 tasks.forEach(task => {
                     const isCompleted = userState.completedTasks && userState.completedTasks[task.key];
                     const el = document.createElement('div'); el.className = 'task-container';
-                    el.innerHTML = `<img class="task-icon-img" src="${task.icon}" alt="icon"><div class="task-info"><h3>${task.name}</h3><p>Get ${task.reward}$ bonus.</p></div><button class="action-btn" data-task-id="${task.key}" data-task-url="${task.url}" ${isCompleted ? 'disabled' : ''}>${isCompleted ? 'Claimed' : 'Claim Bonus'}</button>`;
+                    el.innerHTML = `<img class="task-icon-img" src="${task.icon}" alt="icon"><div class="task-info"><h3>${task.name}</h3><p>Get ${task.reward} $ bonus.</p></div><button class="action-btn" data-task-id="${task.key}" data-task-url="${task.url}" ${isCompleted ? 'disabled' : ''}>${isCompleted ? 'Claimed' : 'Claim Bonus'}</button>`;
                     container.appendChild(el);
                 });
             }
