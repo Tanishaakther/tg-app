@@ -50,7 +50,7 @@
         .chart { display: flex; justify-content: space-around; align-items: flex-end; height: 150px; border-left: 1px solid; border-bottom: 1px solid; padding-top: 10px; }
         .light-theme .chart { border-color: var(--border-light); } .dark-theme .chart { border-color: var(--border-dark); }
         .bar { width: 12%; background: linear-gradient(to top, var(--primary-color), var(--secondary-color)); border-radius: 5px 5px 0 0; position: relative; cursor: pointer; }
-        .bar .tooltip { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: white; padding: 3px 7px; border-radius: 5px; font-size: 0.8rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        .bar .tooltip { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: var(--primary-color); padding: 3px 7px; border-radius: 5px; font-size: 0.8rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
         .bar:hover .tooltip { opacity: 1; }
         .chart-labels { display: flex; justify-content: space-around; font-size: 0.75rem; margin-top: 5px; }
 
