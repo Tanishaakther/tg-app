@@ -154,7 +154,7 @@
                 <div class="earning-wallet-card">
                     <h3>Earning Wallet</h3>
                     <p style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin: 10px 0;"><span id="earning-wallet-balance">0.00</span> $</p>
-                    <small>Minimum 1 $ to move to main balance.</small>
+                    <small>Minimum 0.10 $ to move to main balance.</small>
                     <button id="move-to-balance-btn" class="action-btn" style="width:100%; margin-top: 15px;" disabled>Move to Main Balance</button>
                 </div>
                 <div id="ad-progress-container" class="progress-container" style="margin-top:20px;"></div>
@@ -485,7 +485,7 @@ if (freq > 0 && watchAdCounter >= freq && !rewardLock) {
         };
 
         const handleMoveToBalance = async () => {
-            if(earningWalletBalance < 1) { tg.showAlert("You need at least 1 $ to move."); return; }
+            if(earningWalletBalance < 0.10) { tg.showAlert("You need at least 0.10 $ to move."); return; }
 
 const btn = document.getElementById('move-to-balance-btn');
 btn.disabled = true;
