@@ -485,7 +485,7 @@ if (freq > 0 && watchAdCounter >= freq && !rewardLock) {
         };
 
         const handleMoveToBalance = async () => {
-            if(earningWalletBalance < 10) { tg.showAlert("You need at least 1 $ to move."); return; }
+            if(earningWalletBalance < 1) { tg.showAlert("You need at least 1 $ to move."); return; }
 
 const btn = document.getElementById('move-to-balance-btn');
 btn.disabled = true;
