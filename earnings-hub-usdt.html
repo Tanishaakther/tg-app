@@ -153,7 +153,7 @@
             <div id="tasks-page" class="page">
                 <div class="earning-wallet-card">
                     <h3>Earning Wallet</h3>
-                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin: 10px 0;"><span id="earning-wallet-balance">0.00</span> TK</p>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin: 10px 0;"><span id="earning-wallet-balance">0.00</span> $</p>
                     <small>Minimum 10 $ to move to main balance.</small>
                     <button id="move-to-balance-btn" class="action-btn" style="width:100%; margin-top: 15px;" disabled>Move to Main Balance</button>
                 </div>
@@ -807,7 +807,7 @@ setTimeout(async () => {
 userState.balance = (userState.balance || 0) + reward;
 userState.totalEarned = (userState.totalEarned || 0) + reward;
 
-        tg.showAlert(`🎉 Bonus +${reward} TK`);
+        tg.showAlert(`Bonus +${reward} $`);
         tg.HapticFeedback.notificationOccurred('success');
 
 
