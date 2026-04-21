@@ -554,58 +554,34 @@ btn.textContent = 'Moving...';
             document.getElementById('move-to-balance-btn').addEventListener('click', handleMoveToBalance);
         };
 
-      //  const renderAdTask = () => {
-     ///       const container = document.getElementById('ad-task-container');
-      //      const now = Date.now();
-       //     const onBreak = userState.breakUntil && now < userState.breakUntil;
-      //      const limitReached = userState.dailyAdCount >= appConfig.dailyAdLimit;
-   //         let html = '';
-    //        if (onBreak) {
-      //          const remaining = Math.ceil((userState.breakUntil - now) / 60000);
-       //         html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/hourglass.png" alt="icon"><div class="task-info"><h3>Break Time!</h3><p>Please wait for ${remaining} more minutes.</p></div><button class="action-btn" disabled >Waiting</button></div>`;
-        //    } else if (limitReached) {
-    //            html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/stop-circled.png" alt="icon"><div class="task-info"><h3>Daily Limit Reached</h3><p>Come back tomorrow for more ads.</p></div><button class="action-btn" disabled>Limit</button></div>`;
-      //      } else {
-      //          html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/play-button-circled.png" alt="icon"><div class="task-info"><h3>Watch a Rewarded Ad</h3><p>Earn ${appConfig.adValue || 0} $ for every ad.</p></div><button id="watch-ad-btn" class="action-btn">Watch Ad</button></div>`;
-     //       }
-     //       container.innerHTML = html;
-     //       if (!onBreak && !limitReached) { document.getElementById('watch-ad-btn').addEventListener('click', handleWatchAd); }
-      //  };
+
+        let breakTimerInterval = null;
+        const renderAdTask = () => {
+            const container = document.getElementById('ad-task-container');
+          const now = Date.now();
+           const onBreak = userState.breakUntil && now < userState.breakUntil;
+          const limitReached = userState.dailyAdCount >= appConfig.dailyAdLimit;
+           let html = '';
+          if (onBreak) {
+               const remaining = Math.ceil((userState.breakUntil - now) / 60000);
+               html = `<div class="task-container">
+               <img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/hourglass.png" alt="icon">
+               <div class="task-info">
+               <h3>Break Time!</h3>
+               <p>Please wait for ${remaining} more minutes.</p></div><button class="action-btn" disabled >Waiting</button></div>`;
+            } else if (limitReached) {
+             html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/stop-circled.png" alt="icon"><div class="task-info"><h3>Daily Limit Reached</h3><p>Come back tomorrow for more ads.</p></div><button class="action-btn" disabled>Limit</button></div>`;
+            } else {
+              html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/play-button-circled.png" alt="icon"><div class="task-info"><h3>Watch a Rewarded Ad</h3><p>Earn ${appConfig.adValue || 0} $ for every ad.</p></div><button id="watch-ad-btn" class="action-btn">Watch Ad</button></div>`;
+            }
+          container.innerHTML = html;
+          if (!onBreak && !limitReached) { document.getElementById('watch-ad-btn').addEventListener('click', handleWatchAd); }
+              };
 
 
-let breakTimerInterval = null;
 
-const renderAdTask = () => {
-    const container = document.getElementById('ad-task-container');
-    const now = Date.now();
-    const onBreak = userState.breakUntil && now < userState.breakUntil;
-    const limitReached = userState.dailyAdCount >= appConfig.dailyAdLimit;
 
-    let html = '';
 
-    if (onBreak) {
-        html = `
-        <div class="task-container">
-            <img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/hourglass.png">
-            <div class="task-info">
-                <h3>Break Time!</h3>
-                <p id="break-timer-text">Loading...</p>
-            </div>
-            <button class="action-btn" disabled>Waiting</button>
-        </div>`;
-        
-        container.innerHTML = html;
-
-        startBreakTimer(); // 👈 timer start
-    } 
-    else if (limitReached) {
-        container.innerHTML = `...`;
-    } 
-    else {
-        container.innerHTML = `...`;
-        document.getElementById('watch-ad-btn').addEventListener('click', handleWatchAd);
-    }
-};
 
 
 function startBreakTimer() {
