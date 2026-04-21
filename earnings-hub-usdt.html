@@ -415,7 +415,7 @@ await firebase.database()
                 await adFunction();
                 closePopup();
                 const adValue = appConfig.adValue || 0;
-                earningWalletBalance += adValue;
+                earningWalletBalance = Math.round((earningWalletBalance + adValue) * 100) / 100;
                 localStorage.setItem(`earningWallet_${tgUser.id}`, earningWalletBalance.toString());
  
 
