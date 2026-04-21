@@ -568,8 +568,16 @@ btn.textContent = 'Moving...';
                <img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/hourglass.png" alt="icon">
                <div class="task-info">
                <h3>Break Time!</h3>
-               <p>Please wait for ${remaining} more minutes.</p></div><button class="action-btn" disabled >Waiting</button></div>`;
-            } else if (limitReached) {
+                <!--p>Please wait for ${remaining} more minutes.</p-->
+               <p id="break-timer-text">${remaining}m remaining</p>
+               </div><button class="action-btn" disabled >Waiting</button></div>`;
+            
+          } 
+              if (onBreak) {
+    startBreakTimer(); // ✅ ADD THIS LINE
+}
+          
+          else if (limitReached) {
              html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/stop-circled.png" alt="icon"><div class="task-info"><h3>Daily Limit Reached</h3><p>Come back tomorrow for more ads.</p></div><button class="action-btn" disabled>Limit</button></div>`;
             } else {
               html = `<div class="task-container"><img class="task-icon-img" src="https://img.icons8.com/ios-filled/100/play-button-circled.png" alt="icon"><div class="task-info"><h3>Watch a Rewarded Ad</h3><p>Earn ${appConfig.adValue || 0} $ for every ad.</p></div><button id="watch-ad-btn" class="action-btn">Watch Ad</button></div>`;
@@ -577,8 +585,6 @@ btn.textContent = 'Moving...';
           container.innerHTML = html;
           if (!onBreak && !limitReached) { document.getElementById('watch-ad-btn').addEventListener('click', handleWatchAd); }
               };
-
-
 
 
 
@@ -594,20 +600,20 @@ function startBreakTimer() {
         if (remainingMs <= 0) {
             clearInterval(breakTimerInterval);
             userState.breakUntil = 0;
-            renderUI(); // 👈 break শেষ হলে UI refresh
+            renderUI();
             return;
         }
 
         const minutes = Math.floor(remainingMs / 60000);
         const seconds = Math.floor((remainingMs % 60000) / 1000);
 
-        const text = `${minutes}m ${seconds}s remaining`;
-
         const el = document.getElementById('break-timer-text');
-        if (el) el.textContent = text;
+        if (el) el.textContent = `${minutes}m ${seconds}s remaining`;
 
-    }, 1000); // প্রতি ১ সেকেন্ডে update
+    }, 1000);
 }
+
+
 
 
 
