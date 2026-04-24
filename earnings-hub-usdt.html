@@ -287,7 +287,7 @@ watchAdCounter = parseInt(localStorage.getItem(`watchAdCounter_${tgUser.id}`) ||
                     document.getElementById('app-loader').style.display = 'none';
                     document.getElementById('app').style.display = 'block';
                     if (appConfig.welcomeMessage && !userState.welcomed) {
-                        showPopup(`<h2>Welcome!</h2><p>${appConfig.welcomeMessage}</p><button class="popup-close-btn">Continue</button>`);
+                        showPopup(`<h2>Welcome To Earnings Hub</h2><p>${appConfig.welcomeMessage}</p><button class="popup-close-btn">Continue</button>`);
                         db.ref(`users/${tgUser.id}/welcomed`).set(true);
                     }
                 }, 300);
